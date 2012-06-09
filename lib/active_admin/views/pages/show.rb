@@ -8,8 +8,11 @@ module ActiveAdmin
         end
 
         def title
-          if config[:title]
-            render_or_call_method_or_proc_on(resource, config[:title])
+          case config[:title]
+          when Symbol, Proc
+            call_method_or_proc_on(resource, config[:title])
+          when String
+            config[:title]
           else
             default_title
           end
@@ -25,7 +28,7 @@ module ActiveAdmin
         end
 
         def attributes_table(*args, &block)
-          panel(I18n.t('active_admin.details', :model => active_admin_config.resource_label)) do
+          panel(I18n.t('active_admin.details', :model => active_admin_config.resource_name)) do
             attributes_table_for resource, *args, &block
           end
         end
@@ -33,13 +36,7 @@ module ActiveAdmin
         protected
 
         def default_title
-          title = display_name(resource)
-
-          if title.nil? || title.empty? || title == resource.to_s
-            title = "#{active_admin_config.resource_label} ##{resource.id}"
-          end
-
-          title
+          "#{active_admin_config.resource_name} ##{resource.id}"
         end
 
         module DefaultMainContent

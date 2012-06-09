@@ -1,30 +1,5 @@
 ## Master (unreleased)
 
-### Enhancements
-
-* Created new view components (Footer, TitleBar, Header, UtilityNav) to more
-  easily customize the views in Active Admin and per namespace. (@gregbell)
-* All CSS is now encapsulated under the `body.active_admin` class. This may
-  change the precedence of styles that you created to override or use in
-  other areas of your application.
-
-### Deprecations
-
-* Removed all references to ActiveAdmin::Renderer. If you were using these
-  please update code to use an Arbre component. Removed
-  `ActiveAdmin:Views::HeaderRender` and replaced with
-  `ActiveAdmin::Views::Header` component.
-* ActiveAdmin::Menu and ActiveAdmin::MenuItem API has changed. If you were
-  creating custom menu items, the builder syntax has changed to. Menu#add now
-  accepts a MenuItem, instead of building the menu item for you.
-
-## 0.4.4
-
-### Dependencies
-
-* Use `formtastic` ~> 2.1.1 until AA 0.5.0 is released
-* Use `inherited_resources` >= 1.3.1 (ensure flash messages work)
-
 ## 0.4.3
 
 ### Bug Fixes
@@ -43,7 +18,6 @@
 * [#1032][]: The html body now includes a class for the namespace name ([@mattvague][])
 * [#1013][]: Hide the count from one specific scope using `:show_count => false`
          ([@latortuga][])
-* [#1023][]: Add localization support for comments ([@MoritzMoritz][])
 
 ### Bug Fixes
 
@@ -52,21 +26,6 @@
          a blank array in Ruby 1.9 ([@jancel][], [#1016][])
 * [#983][]: Fixed compatibility with pry-rails ([@pcreux][])
 * [#409][]: Install generator handles custom class names for user ([@gregbell][])
-
-### Contributors
-
-42 Commits by 10 authors
-
-* Allen Huang
-* Daniel Lepage
-* Thibaut Barrère
-* Drew Ulmer
-* Juan Schwindt
-* Moritz Behr
-* Jeff Ancel
-* Matt Vague
-* Greg Bell
-* Philippe Creux
 
 
 ## 0.4.1
@@ -559,14 +518,12 @@ of the highlights. 250 commits. Enough said.
 [#994]: https://github.com/gregbell/active_admin/issues/994
 [#1013]: https://github.com/gregbell/active_admin/issues/1013
 [#1016]: https://github.com/gregbell/active_admin/issues/1016
-[#1023]: https://github.com/gregbell/active_admin/issues/1023
 [#1032]: https://github.com/gregbell/active_admin/issues/1032
 [#1033]: https://github.com/gregbell/active_admin/issues/1033
 [#1041]: https://github.com/gregbell/active_admin/issues/1041
 [#1063]: https://github.com/gregbell/active_admin/issues/1063
 [@BoboFraggins]: https://github.com/BoboFraggins
 [@DMajrekar]: https://github.com/DMajrekar
-[@MoritzMoritz]: https://github.com/MoritzMoritz
 [@ZequeZ]: https://github.com/ZequeZ
 [@bobbytables]: https://github.com/bobbytables
 [@comboy]: https://github.com/comboy

@@ -35,21 +35,24 @@ module ActiveAdmin
     include Resource::Menu
     include Resource::Naming
 
-    # label is singular
-    def plural_resource_label
+    # plural_resource_name is singular
+    def resource_name
       name
     end
 
-    def resource_name
-      @resource_name ||= Resource::Name.new(nil, name)
+    def safe_resource_name
+      name
     end
 
-    def default_menu_options
-      super.merge(:id => resource_name)
+
+    # Force plural to be singular
+    def plural_resource_name
+      name
     end
 
-    def controller_name
-      [namespace.module_name, resource_name + "Controller"].compact.join('::')
+    # Force plural to be singular
+    def plural_safe_resource_name
+      name
     end
 
     def belongs_to?

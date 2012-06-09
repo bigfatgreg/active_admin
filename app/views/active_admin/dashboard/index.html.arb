@@ -1,1 +1,1 @@
-insert_tag view_factory.dashboard_page
+render view_factory.dashboard_page

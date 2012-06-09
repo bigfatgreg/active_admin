@@ -1,1 +1,1 @@
-insert_tag renderer_for(:index)
+render renderer_for(:index)

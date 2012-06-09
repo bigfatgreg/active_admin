@@ -2,11 +2,11 @@
 #header { 
   @include primary-gradient;
   @include shadow;
-  @include text-shadow(#000);
   height: 20px;
   overflow: visible;
-  position: inherit;
+  position: relative;
   padding: 9px $horizontal-page-margin;
+  position: relative;
   z-index: 900;
 
   h1 { 
@@ -33,7 +33,10 @@
     }
   }
 
-  a, a:link { color: #cdcdcd; }
+  a, a:link {
+  	color: #cdcdcd;
+    text-decoration: none;
+  }
 
   .header-item {
     float: left;
@@ -109,7 +112,8 @@
           margin: 0px; 
           a { 
             background: none;
-            display: block; 
+            display: block;
+            text-decoration: none;
             &:hover { color: #fff; background: none; }
           }
 

@@ -1,12 +1,12 @@
 <div id="login">
-  <%= content_tag :h2, t('active_admin.devise.reset_password.title') %>
+  <h2>Forgot your password?</h2>
 
   <%= active_admin_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| 
     f.inputs do
       f.input :email
     end
-    f.actions do
-      f.action :submit, :label => t('active_admin.devise.reset_password.submit'), :button_html => { :value => "Reset My Password" }
+    f.buttons do
+      f.commit_button "Reset My Password"
     end
   end %>
 

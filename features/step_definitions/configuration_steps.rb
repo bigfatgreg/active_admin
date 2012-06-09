@@ -1,11 +1,10 @@
 module ActiveAdminReloading
 
   def load_active_admin_configuration(configuration_content)
-    ActiveAdmin::Event.dispatch ActiveAdmin::Application::BeforeLoadEvent, ActiveAdmin.application
     eval(configuration_content)
-    ActiveAdmin::Event.dispatch ActiveAdmin::Application::AfterLoadEvent, ActiveAdmin.application
+    ActiveAdmin::Event.dispatch ActiveAdmin::Application::LoadEvent, ActiveAdmin.application
     Rails.application.reload_routes!
-    ActiveAdmin.application.namespaces.values.each{|n| n.reset_menu! }
+    ActiveAdmin.application.namespaces.values.each{|n| n.load_menu! }
   end
 
 end
@@ -47,6 +46,7 @@ end
 
 Given /^a configuration of:$/ do |configuration_content|
   load_active_admin_configuration(configuration_content)
+  ActiveAdmin.application.namespaces.values.each{|n| n.load_menu! }
 end
 
 Given /^an index configuration of:$/ do |configuration_content|
@@ -57,21 +57,11 @@ Given /^an index configuration of:$/ do |configuration_content|
 end
 
 Given /^a show configuration of:$/ do |configuration_content|
-  resource = configuration_content.match(/ActiveAdmin\.register (\w+)/)[1]
   load_active_admin_configuration(configuration_content)
 
-  case resource
-  when "Post"
-    step 'I am logged in'
-    step "I am on the index page for posts"
-    step 'I follow "View"'
-  when "Tag"
-    step 'I am logged in'
-    Tag.create!
-    visit admin_tag_path(Tag.last)
-  else
-    raise "#{resource} is not supported"
-  end
+  step 'I am logged in'
+  step "I am on the index page for posts"
+  step 'I follow "View"'
 end
 
 Given /^"([^"]*)" contains:$/ do |filename, contents|

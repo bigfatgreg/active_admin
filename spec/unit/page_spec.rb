@@ -11,7 +11,7 @@ module ActiveAdmin
     let(:namespace){ Namespace.new(application, :admin) }
 
     def config(options = {})
-      @config ||= namespace.register_page("Status", options)
+      @config ||= Page.new(namespace, "Status", options)
     end
 
     describe "controller name" do
@@ -30,15 +30,17 @@ module ActiveAdmin
       it "returns the name" do
         config.resource_name.should == "Status"
       end
+    end
 
-      it "returns the underscored name" do
-        config.resource_name.singular.should == "status"
+    describe "#plural_resource_name" do
+      it "returns the singular name" do
+        config.plural_resource_name.should == "Status"
       end
     end
 
-    describe "#plural_resource_label" do
-      it "returns the singular name" do
-        config.plural_resource_label.should == "Status"
+    describe "#underscored_resource_name" do
+      it "returns the underscored name" do
+        config.underscored_resource_name.should == "status"
       end
     end
 

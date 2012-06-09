@@ -10,8 +10,10 @@ The first step to contributing to Active Admin is creating a ticket in our
 The community has been hard at work already, so please take a second to search
 for the issue or feature before creating a new one.
 
-All bug fixes should have a ticket. This makes it easy for everyone
-to discuss the code and know if a fix is already in progress for an issue.
+All features or bug fixes should have a ticket. This makes it easy for everyone
+to discuss the code and know if a fix is already in progress for an issue. If
+it's a feature, the team can prioritize what it should work on based on these
+tickets.
 
 
 ### 2. Fork & Create a Feature Branch

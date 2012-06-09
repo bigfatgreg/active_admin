@@ -57,9 +57,6 @@ module ActiveAdmin
     # The method to use when generating the link for user logout
     inheritable_setting :logout_link_method, :get
 
-    # Whether the batch actions are enabled or not
-    inheritable_setting :batch_actions, true
-
     # Active Admin makes educated guesses when displaying objects, this is
     # the list of methods it tries calling in order
     setting :display_name_methods, [ :display_name,
@@ -83,8 +80,7 @@ module ActiveAdmin
     include AssetRegistration
 
     # Event that gets triggered on load of Active Admin
-    BeforeLoadEvent = 'active_admin.application.before_load'.freeze
-    AfterLoadEvent = 'active_admin.application.after_load'.freeze
+    LoadEvent = 'active_admin.application.load'.freeze
 
     def setup!
       register_default_assets
@@ -161,16 +157,17 @@ module ActiveAdmin
       # No work to do if we've already loaded
       return false if loaded?
 
-      ActiveAdmin::Event.dispatch BeforeLoadEvent, self
-
       # Load files
       files_in_load_path.each{|file| load file }
 
       # If no configurations, let's make sure you can still login
       load_default_namespace if namespaces.values.empty?
 
+      # Load Menus
+      namespaces.values.each{|namespace| namespace.load_menu! }
+
       # Dispatch an ActiveAdmin::Application::LoadEvent with the Application
-      ActiveAdmin::Event.dispatch AfterLoadEvent, self
+      ActiveAdmin::Event.dispatch LoadEvent, self
 
       @@loaded = true
     end
@@ -227,8 +224,7 @@ module ActiveAdmin
     private
 
     def register_default_assets
-      register_stylesheet 'active_admin.css', :media => 'screen'
-      register_stylesheet 'active_admin/print.css', :media => 'print'
+      register_stylesheet 'active_admin.css', :media => 'all'
 
       if !ActiveAdmin.use_asset_pipeline?
         register_javascript 'jquery.min.js'
@@ -259,6 +255,10 @@ module ActiveAdmin
     end
 
     def generate_stylesheets
+      # This must be required after initialization
+      require 'sass/plugin'
+      require 'active_admin/sass/helpers'
+
       # Create our own asset pipeline in Rails 3.0
       if ActiveAdmin.use_asset_pipeline?
         # Add our mixins to the load path for SASS

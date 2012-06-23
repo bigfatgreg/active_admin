@@ -19,7 +19,7 @@ module ActiveAdmin
             f.filter attribute, filter_options
           end
 
-          buttons = content_tag :div, :class => "buttons" do
+          buttons = content_tag :div, :class => "btn" do
             f.submit(I18n.t('active_admin.filter')) +
               clear_link +
               hidden_field_tag("order", params[:order]) +

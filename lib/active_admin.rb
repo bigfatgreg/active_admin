@@ -9,6 +9,7 @@ require 'jquery-rails'
 require 'active_admin/arbre'
 require 'active_admin/engine'
 
+
 module ActiveAdmin
 
   autoload :VERSION,                  'active_admin/version'

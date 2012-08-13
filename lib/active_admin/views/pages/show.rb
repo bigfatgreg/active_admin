@@ -33,6 +33,12 @@ module ActiveAdmin
           end
         end
 
+				def attributes_table_for_resource(specified_resource, *args, &block)
+					panel(I18n.t('active_admin.details', :model => "#{specified_resource.class.name} #{specified_resource.id}")) do
+						attributes_table_for specified_resource, *args, &block
+					end
+				end
+
         protected
 
         def default_title

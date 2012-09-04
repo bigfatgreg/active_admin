@@ -20,7 +20,7 @@ en:
     next: "Next"
     download: "Download:"
     has_many_new: "Add New %{model}"
-    has_many_delete: "Delete"
+    has_many_delete: "Cancel"
     filter: "Filter"
     clear_filters: "Clear Filters"
     search_field: "Search %{field}"

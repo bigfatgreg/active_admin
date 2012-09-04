@@ -4,6 +4,30 @@ form {
   ul, ol, li, fieldset, legend, input, textarea, select, p { margin:0; padding:0; }
   ol, ul { list-style: none }
 
+	.has_many_fields {
+		position: relative;
+		margin: 30px 30px 20px 13px;
+		padding: 0 0 26px 16px;
+		height: 60px;
+		
+		.button {
+			position: absolute;
+			bottom: 8px;
+			left: 5px;
+		}
+		.inline-hints {
+			font-size: 1em;
+			font-style: normal;
+			color: #666;
+			margin: 0;
+			float: left;			
+		}
+		select {
+			position: absolute;
+			top: 40px;
+			left: 14px;
+		}
+	}
 
   fieldset { 
     border: 0; 
